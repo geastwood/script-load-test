@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Script load test - Function</title>
+    <link rel="stylesheet" href="../css/prism.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>How function evaluated in Browser</h1>
+        <p>Even if <kbd>$</kbd> in function <kbd>foo</kbd> is not defined anywhere, it will not trigger a runtime error when the function is defined. Only when the foo is called, the global <kbd>bar</kbd> will be set a value. And error will be triggered.</p>
+        <pre>
+        <code class="language-javascript">
+        var bar; // defaut to undefined
+        console.log(bar); // log undefined
+        function foo() {
+
+            bar = 'variable bar is only set when "foo" is called';
+            $('some-selector').val('dummy value');
+            alert('should not alert unless the function is called');
+
+        }
+
+        console.log(bar); // log undefined
+        foo();
+        console.log(bar); // log "variable bar is only set when "foo" is called"
+        </code>
+        </pre>
+    </div>
+    <script src="../js/function.js"></script>
+    <script src="../js/lib/prism.js"></script>
+</body>
+</html>
