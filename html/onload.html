@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <ul id="sequence"></ul>
+        <button id="btn">I'm a dummy button</button>
+    </div>
+
+    <script>
+        var log = (function() {
+            var count = 0;
+            var container = document.getElementById('sequence');
+            return function(msg) {
+                var li = document.createElement('li');
+                li.innerHTML = msg + ' -> (load sequence: ' + (++count) + ')';
+                container.appendChild(li);
+            }
+        }());
+        window.onload = function() {
+            log('onload event is fired (onload)');
+        };
+        document.addEventListener('DOMContentLoaded', function() {
+            log('Dom ready event fired (DOMContentLoaded)');
+        }, false);
+        var btn = document.getElementById('btn');
+        btn.addEventListener('click', function() {
+            foo('fei');
+        }, false);
+        var fei;
+        function foo() {
+            fei = 'fei is defined now';
+            function hi() {alert('fei')};
+            hi();
+        }
+    </script>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        log('typeof $.ajax:' + (typeof $.ajax) + '(means remote jquery source is loaded.)');
+        setTimeout(function() {
+            window.foo = function(msg) {
+                alert(msg + ' fei clicked');
+            };
+        }, 10000)
+    </script>
+    <script>
+        function loop() {
+            var tmp = 0, start = new Date();
+            for (var i = 0; i < 1000000000; i++) {
+                tmp += i;
+            }
+            log('long running task takes ' + (start - (new Date())) + 'ms');
+        }
+        loop();
+    </script>
+</body>
+</html>
